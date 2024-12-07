@@ -1,50 +1,26 @@
-# React + TypeScript + Vite
+# My version of Minesweeper game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+I was recently captivated by a version of minesweeper mini game in Dota 2.
 
-Currently, two official plugins are available:
+Without much luck in finding alternatives that would satisfy me in the same way it did, I've decided to build it myself.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Regular features of a usual minesweeper
+- Added functionality for auto flagging by right-clicking revealed cell
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Planned Features
 
-- Configure the top-level `parserOptions` property like this:
+- Difficulties without having to manually apply height, width and number of mines
+- Magic:
+  - Add reveal ability that would cost mana
+  - Mana restoring potions on revealing certain bonus cells with a stepped timer
+- Play with timer
+  - Probably going to be a fixed timer
+  - Replenish by revealing certain bonus cells with a stepped timer
+  - Scoring system
+  - Leaderboard
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Need to deploy
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+I haven't deployed it yet. Once I do, will probably share a link here.
