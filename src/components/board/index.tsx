@@ -2,12 +2,14 @@ import { useState } from "react";
 import Cell from "../cell";
 
 import "./style.css";
+import { Difficulty } from "../game";
 
 interface BoardProps {
   mines: number;
   gameStatus: string;
   height: number;
   width: number;
+  onSelectDifficulty: (difficulty: Difficulty) => void;
 }
 
 interface BoardState {
@@ -276,6 +278,20 @@ export const Board = (props: BoardProps) => {
   return (
     <div className="board">
       <div className="mines-count">
+        <div>
+          {(Object.keys(Difficulty) as Array<keyof typeof Difficulty>).map(
+            (x) => (
+              <button
+                onClick={() => {
+                  props.onSelectDifficulty(Difficulty[x]);
+                  restartBoard();
+                }}
+              >
+                {x}
+              </button>
+            )
+          )}
+        </div>
         <button onClick={restartBoard}>Restart</button>
         <span>Mines: {state.minesCount}</span>
       </div>

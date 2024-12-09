@@ -1,6 +1,6 @@
 .cell {
     display: flex;
-    background-color: rgb(136, 80, 83);
+    background-color: rgb(72 56 42);
     min-width: 30px;
     min-height: 30px;
     align-items: center;
@@ -21,10 +21,11 @@
 }
 
 .cell.hidden {
-    background-color: rgb(91, 66, 69);
+    background-color: rgb(68 80 24);
 }
 
 .cell.hidden:hover {
+    /* TODO: Add bounciness */
     background-color: rgb(111, 76, 79);
 }
 
@@ -45,5 +46,37 @@
 
 /* Empty revealed cells*/
 .cell.is-empty:not(.hidden):not(.is-mine):not(.is-flagged) {
-    background-color: rgb(121, 65, 68);
+    background-color: rgb(72 56 42);
+}
+
+.n-1 {
+    color: rgb(119 140 63)
+}
+
+.n-2 {
+    color: rgb(162 169 71)
+}
+
+.n-3 {
+    color: rgb(191 181 64)
+}
+
+.n-4 {
+    color: rgb(206 146 40)
+}
+
+.n-5 {
+    color: rgb(177 89 35);
+}
+
+.n-6 {
+    color: rgb(177 89 35);
+}
+
+.n-7 {
+    color: rgb(177 89 35);
+}
+
+.n-8 {
+    color: rgb(177 89 35);
 }

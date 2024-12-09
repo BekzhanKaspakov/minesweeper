@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Board from "../board";
 
 import "./style.css";
@@ -10,6 +10,11 @@ type GameState = {
   gameStatus: string;
 };
 
+export enum Difficulty {
+  EASY = "easy",
+  MEDIUM = "medium",
+  HARD = "hard",
+}
 export const Game = () => {
   const [state, setState] = useState<GameState>({
     height: 8,
@@ -18,38 +23,38 @@ export const Game = () => {
     gameStatus: "0",
   });
 
-  const handleChange = (
-    prop: keyof GameState,
-    value: GameState[keyof GameState]
-  ) => {
-    setState((state) => ({ ...state, [prop]: value }));
+  const handleChangeDifficulty = (difficulty: Difficulty) => {
+    let height;
+    let width;
+    let mines;
+    switch (difficulty) {
+      case Difficulty.EASY: {
+        height = 8;
+        width = 8;
+        mines = 10;
+        break;
+      }
+      case Difficulty.MEDIUM: {
+        height = 13;
+        width = 15;
+        mines = 40;
+        break;
+      }
+      default: {
+        height = 16;
+        width = 30;
+        mines = 99;
+        break;
+      }
+    }
+    setState({ ...state, height, width, mines });
   };
-
-  const handleChangeHeight = (event: React.FormEvent<HTMLInputElement>) => {
-    const val = clamp(Number(event.currentTarget.value), 5, 18);
-    handleChange("height", val);
-  };
-
-  const handleChangeWidth = (event: React.FormEvent<HTMLInputElement>) => {
-    const val = clamp(Number(event.currentTarget.value), 5, 18);
-    handleChange("width", val);
-  };
-
-  const handleChangeMines = (event: React.FormEvent<HTMLInputElement>) => {
-    const cap = Math.floor((state.height * state.width) / 3);
-    const val = clamp(Number(event.currentTarget.value), 1, cap);
-    handleChange("mines", val);
-  };
-
-  // const restartGame = () => {
-  //   boardElement.current.restartBoard();
-  // };
 
   const { height, width, mines, gameStatus } = state;
   return (
     <div className="game">
       <Board
-        // ref={boardElement.current ?? null}
+        onSelectDifficulty={handleChangeDifficulty}
         height={height}
         width={width}
         mines={mines}
@@ -58,29 +63,8 @@ export const Game = () => {
       <div className="control-buttons">
         <form>
           <label>Height</label>
-          <input
-            type="number"
-            value={state.height}
-            onChange={handleChangeHeight}
-          />
-          <label>Width</label>
-          <input
-            type="number"
-            value={state.width}
-            onChange={handleChangeWidth}
-          />
-          <label>Mines</label>
-          <input
-            type="number"
-            value={state.mines}
-            onChange={handleChangeMines}
-          />
         </form>
       </div>
     </div>
   );
 };
-
-function clamp(n: number, min: number, max: number) {
-  return Math.max(min, Math.min(n, max));
-}

@@ -29,7 +29,8 @@ const Cell = (props: CellProps) => {
     (props.value.isClicked ? " is-clicked" : "") +
     (props.value.isEmpty ? " is-empty" : "") +
     (props.value.isUnknown ? " is-unknown" : "") +
-    (props.value.isFlagged ? " is-flag" : "");
+    (props.value.isFlagged ? " is-flag" : "") +
+    ` n-${props.value.n}`;
 
   return (
     <div
