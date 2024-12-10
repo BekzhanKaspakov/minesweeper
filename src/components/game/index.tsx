@@ -10,11 +10,12 @@ type GameState = {
   gameStatus: string;
 };
 
-export enum Difficulty {
+enum Difficulty {
   EASY = "easy",
   MEDIUM = "medium",
   HARD = "hard",
 }
+
 export const Game = () => {
   const [state, setState] = useState<GameState>({
     height: 8,
@@ -53,8 +54,20 @@ export const Game = () => {
   const { height, width, mines, gameStatus } = state;
   return (
     <div className="game">
+      <div>
+        {(Object.keys(Difficulty) as Array<keyof typeof Difficulty>).map(
+          (x) => (
+            <button
+              onClick={() => {
+                handleChangeDifficulty(Difficulty[x]);
+              }}
+            >
+              {x}
+            </button>
+          )
+        )}
+      </div>
       <Board
-        onSelectDifficulty={handleChangeDifficulty}
         height={height}
         width={width}
         mines={mines}
