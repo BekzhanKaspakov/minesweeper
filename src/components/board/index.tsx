@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Cell from "../cell";
 
 import "./style.css";
@@ -131,7 +131,7 @@ export const Board = (props: BoardProps) => {
     return minesArray;
   };
   // Board utilities
-  const createNewBoard = (click = null) => {
+  const createNewBoard = (click: number | null = null) => {
     const grid: GridCell[][] = [];
     const rows = props.width;
     const columns = props.height;
@@ -179,7 +179,12 @@ export const Board = (props: BoardProps) => {
   // Cell click handlers
   const handleLeftClick = (y: number, x: number) => {
     if (state == null) throw new Error();
-    const grid = state.grid;
+    let grid;
+    if (state.revealedCells === 0) {
+      grid = createNewBoard(y * props.width + x);
+    } else {
+      grid = state.grid;
+    }
     const gridCell = grid[y][x];
 
     if (gridCell.isRevealed) {
@@ -211,10 +216,12 @@ export const Board = (props: BoardProps) => {
       revealEmptyNeigbhours(grid, y, x);
     }
 
+    state.revealedCells++;
+
     gridCell.isFlagged = false;
     gridCell.isRevealed = true;
 
-    setState({ ...state });
+    setState({ ...state, grid });
 
     checkVictory();
   };
@@ -259,6 +266,20 @@ export const Board = (props: BoardProps) => {
     restartBoard();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
+
+  const handler = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.isComposing || e.code === "KeyR") {
+        restartBoard();
+      }
+    },
+    [restartBoard]
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", handler, false);
+    return () => window.removeEventListener("keydown", handler, false);
+  }, [handler]);
 
   // Rendering functions
   const renderBoard = () => {
