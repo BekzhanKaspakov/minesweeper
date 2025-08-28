@@ -1,7 +1,6 @@
 import { useState } from "react";
-import Board from "../board";
 
-import "./style.css";
+import { Board } from "src/components/board";
 
 type GameState = {
   height: number;
@@ -30,21 +29,21 @@ export const Game = () => {
     let mines;
     switch (difficulty) {
       case Difficulty.EASY: {
-        height = 8;
-        width = 8;
-        mines = 10;
+        height = 13;
+        width = 15;
+        mines = 32;
         break;
       }
       case Difficulty.MEDIUM: {
-        height = 13;
-        width = 15;
-        mines = 40;
+        height = 14;
+        width = 18;
+        mines = 47;
         break;
       }
       default: {
         height = 16;
-        width = 30;
-        mines = 99;
+        width = 20;
+        mines = 66;
         break;
       }
     }
@@ -64,7 +63,7 @@ export const Game = () => {
             >
               {x}
             </button>
-          )
+          ),
         )}
       </div>
       <Board

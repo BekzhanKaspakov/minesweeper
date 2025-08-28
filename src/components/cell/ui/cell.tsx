@@ -1,5 +1,4 @@
-import { GridCell } from "../board";
-import "./style.css";
+import { GridCell } from "../models/grid-cell";
 
 interface CellProps {
   value: GridCell;
@@ -7,7 +6,7 @@ interface CellProps {
   cMenu: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-const Cell = (props: CellProps) => {
+export const Cell = (props: CellProps) => {
   const getValue = () => {
     const { value } = props;
 
@@ -42,5 +41,3 @@ const Cell = (props: CellProps) => {
     </div>
   );
 };
-
-export default Cell;
